@@ -14,7 +14,7 @@ function Form(props) {
 
     // Define state for each component
     const [personalDetails, setPersonalDetails] = useState({firstname: '', middlename: '', lastname: '', email: '', age: ''})
-    const [studyDetails, setStudyDetails] = useState({studying: '', studyinfo: ''})
+    const [studyDetails, setStudyDetails] = useState({studying: '', studydetails: ''})
     const [extraInfo, setExtraInfo] = useState('')
 
     // All Errors must be false for valid form 
