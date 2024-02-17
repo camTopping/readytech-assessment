@@ -1,9 +1,10 @@
 import { Container, Typography } from "@mui/material";
 import LargeTextField from "components/LargeTextField";
 
-function ExtraInformation () {
+function ExtraInformation (props) {
+    const {value, onChange, ...rest} = props;
     return(
-        <Container>
+        <Container {...rest}>
             <Typography variant="h3">Extra Information</Typography>
             <LargeTextField 
                 label="Extra information"

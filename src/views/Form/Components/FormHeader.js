@@ -1,8 +1,8 @@
 import { Container, Typography } from "@mui/material";
 
-function FormHeader() {
+function FormHeader(props) {
     return (
-        <Container>
+        <Container {...props}>
             <Typography variant='h1' color="text.primary">
                 Form Title
             </Typography>
