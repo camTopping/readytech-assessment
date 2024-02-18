@@ -5,7 +5,6 @@ function LargeTextField(props) {
         <TextField 
             multiline
             rows={8}
-            maxRows={20}
             {...props}
         />
     )

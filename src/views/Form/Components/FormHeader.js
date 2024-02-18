@@ -6,7 +6,7 @@ function FormHeader(props) {
             <Typography variant='h1' color="text.primary">
                 Form Title
             </Typography>
-            <Typography variant='h2' color="text.secondary">
+            <Typography color="text.secondary">
                 Form descriptions
             </Typography>
         </Container>

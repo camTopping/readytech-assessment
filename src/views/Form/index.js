@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Alert, CircularProgress, IconButton } from '@mui/material';
+import { Container, Typography, Button, Alert, CircularProgress } from '@mui/material';
 import PersonalDetails from './Components/PersonalDetails';
 import StudyingDetails from './Components/StudyingDetails';
 import FormHeader from './Components/FormHeader';
@@ -15,8 +15,6 @@ function Form(props) {
 
     // Define errors to track valid form
     const [errorPersonal, setErrorPersonal] = useState(false);
-    const [errorStudy, setErrorStudy] = useState(false);
-    const [errorExtra, setErrorExtra] = useState(false);
 
     // Define state for each subcomponent
     const [personalDetails, setPersonalDetails] = useState({firstname: '', middlename: '', lastname: '', email: '', age: ''})
@@ -28,7 +26,19 @@ function Form(props) {
         e.preventDefault();
         
         setIsSubmitting(true);
-        // simulate API call 
+        // simulate API call. data would look similar to this
+        const data = {
+            firstname: personalDetails.firstname,
+            middlename: personalDetails.middlename,
+            lastname:  personalDetails.lastname,
+            email: personalDetails.email,
+            age: personalDetails.age,
+            isStudying: studyDetails.studying, 
+            studyDetails: studyDetails.studydetails, 
+            extraInfo: extraInfo
+        }
+
+        // setSubmitError would be used here if API response was error code
         await delay(3000);
 
         setIsSubmitting(false);
@@ -36,19 +46,19 @@ function Form(props) {
     }
 
     // All Errors must be false for valid form 
-    const isInvalid = errorPersonal || errorStudy || errorExtra;
+    const isInvalid = errorPersonal;
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} {...props}>
             <Flex
                 flexDirection='column'
                 autoComplete='off'
-                gap="24px"
+                gap="12px"
             >
-                <FormHeader />
-                <PersonalDetails values={personalDetails} onChange={setPersonalDetails} />
-                <StudyingDetails values={studyDetails} onChange={setStudyDetails}/>
-                <ExtraInformation value={extraInfo} onChange={setExtraInfo}/>
+                <FormHeader sx={{gap: "4px"}} />
+                <PersonalDetails values={personalDetails} onChange={setPersonalDetails} isError={setErrorPersonal} />
+                <StudyingDetails values={studyDetails} onChange={setStudyDetails} />
+                <ExtraInformation value={extraInfo} onChange={setExtraInfo} />
                 <Container>
                     <Typography variant="h3">Complete form</Typography> 
                     {

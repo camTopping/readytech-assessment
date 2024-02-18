@@ -1,12 +1,19 @@
-import TextField from '@mui/material/TextField';
-import { Divider, Typography, Container } from '@mui/material';
-import { useState } from 'react';
+import { Divider, Typography, Container, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 function PersonalDetails(props) {
-    const {values, onChange, ...rest} = props;
+    const {values, onChange, isError, ...rest} = props;
 
     // Define states for error feedback 
     const [error, setError] = useState({firstname: '', middlename: '', lastname: '', email: '', age: ''});
+
+    // Watch for changes on error for parent 
+    useEffect(() => {
+        if(Object.values(error).some(val => !!val)){
+            return isError(true);
+        }
+        return isError(false);
+    }, [error]);
 
     // Names must be under 50 characters
     const validateName = (id, name) => {
