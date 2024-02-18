@@ -1,5 +1,9 @@
 import { Divider, Typography, Container, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+import validate_email from '../validators/validate_email';
+import validate_name from '../validators/validate_name';
+import validate_integer from '../validators/validate_integer';
+import validate_age from '../validators/validate_age';
 
 function PersonalDetails(props) {
     const {values, onChange, isError, ...rest} = props;
@@ -17,17 +21,18 @@ function PersonalDetails(props) {
 
     // Names must be under 50 characters
     const validateName = (id, name) => {
-        if(name.length > 50 ) return setError({...error, [id]: 'Please use 50 characters or less.'})
-        return setError({...error, [id]: ''});
+        // Check valid name
+        if(!validate_name(name)) return setError({...error, [id]: 'Please use 50 characters or less.'})
+        return setError({...error, [id]: ''});        
     }
 
-    // Must be a valid email address
+    // Email must be valid
     const validateEmail = (id, email) => {
         // Catch empty input 
         if(email==='') return setError({...error, [id]: ''});
-        // Use regex for validating email address
-        const pattern = /[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-        if(!pattern.test(email)) return setError({...error, [id]: 'Please enter a valid email address.'})
+
+        // Check valid email
+        if(!validate_email(email)) return setError({...error, [id]: 'Please enter a valid email address.'})
         return setError({...error, [id]: ''})
     }
 
@@ -35,10 +40,10 @@ function PersonalDetails(props) {
     const validateAge = (id, age) => {
         // Catch empty input 
         if(age==='') return setError({...error, [id]: ''});
-        // Age must be a valid integer
-        if(isNaN(age) || !Number.isInteger(parseFloat(age)) || age.includes('.')) return setError({...error, [id]: 'Age must be an integer.'}) 
-        // Age must be between 18 and 100
-        if(age < 18 || age > 100) return setError({...error, [id]: 'You must be between the ages of 18 and 100.'})
+        
+        // Check if provided input is integer
+        if(!validate_integer(age)) return setError({...error, [id]: 'Age must be an integer.'}) 
+        if(!validate_age(age)) return setError({...error, [id]: 'You must be between the ages of 18 and 100.'})
         return setError({...error, [id]: ''});
     }
 
