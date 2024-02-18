@@ -17,7 +17,7 @@ function PersonalDetails(props) {
     // Must be a valid email address
     const validateEmail = (id, email) => {
         // Catch empty input 
-        if(email=='') return setError({...error, [id]: ''});
+        if(email==='') return setError({...error, [id]: ''});
         // Use regex for validating email address
         const pattern = /[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         if(!pattern.test(email)) return setError({...error, [id]: 'Please enter a valid email address.'})
@@ -27,7 +27,7 @@ function PersonalDetails(props) {
     // Age must be an integer between 18 and 100
     const validateAge = (id, age) => {
         // Catch empty input 
-        if(age=='') return setError({...error, [id]: ''});
+        if(age==='') return setError({...error, [id]: ''});
         // Age must be a valid integer
         if(isNaN(age) || !Number.isInteger(parseFloat(age)) || age.includes('.')) return setError({...error, [id]: 'Age must be an integer.'}) 
         // Age must be between 18 and 100
@@ -54,6 +54,7 @@ function PersonalDetails(props) {
                 onChange={e => handleChange(e, validateName)}
                 error={Boolean(error.firstname)}
                 helperText={error.firstname}
+                required
             />
             <TextField 
                 id="middlename"
@@ -62,7 +63,7 @@ function PersonalDetails(props) {
                 value={values.middlename}
                 onChange={e => handleChange(e, validateName)}
                 error={Boolean(error.middlename)}
-                helperText={error.middlename}
+                helperText={error.middlename ? error.middlename : 'Optional'}
             />
             <TextField 
                 id="lastname"
@@ -72,6 +73,7 @@ function PersonalDetails(props) {
                 onChange={e => handleChange(e, validateName)}
                 error={Boolean(error.lastname)}
                 helperText={error.lastname}
+                required
             />
             <Divider variant='middle' />
             <TextField 
@@ -83,6 +85,7 @@ function PersonalDetails(props) {
                 onChange={e => handleChange(e, validateEmail)}
                 error={Boolean(error.email)}
                 helperText={error.email}
+                required
             />
             <TextField 
                 id="age" 
@@ -93,6 +96,7 @@ function PersonalDetails(props) {
                 onChange={e => handleChange(e, validateAge)}
                 error={Boolean(error.age)}
                 helperText={error.age}
+                required
             />
         </Container>
     )

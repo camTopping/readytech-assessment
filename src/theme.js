@@ -35,6 +35,9 @@ const theme = createTheme({
                         '&:hover': {
                             backgroundColor: 'darkgreen', // Change this to your desired hover color
                         },
+                        '&:disabled': {
+                            color: 'white',
+                        }
                     }
                 }
             ]

@@ -1,4 +1,4 @@
-import { Container, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import { Container, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import LargeTextField from "components/LargeTextField";
 
 function StudyingDetails(props) {
@@ -7,7 +7,6 @@ function StudyingDetails(props) {
     // Define handle function for onChange
     const handleChange = (e) => {
         const {name, value} = e.target;
-        console.log((name, value));
         // Only change the input being updated
         onChange({...values, [name]: value});
     }
@@ -17,14 +16,14 @@ function StudyingDetails(props) {
             <Typography variant="h3">Are you currently studying?</Typography>
             <FormControl id='studying'>
                 <RadioGroup onChange={handleChange}>
-                    <FormControlLabel name='studying' value="yes" control={<Radio />} label="Yes" />
-                    <FormControlLabel name='studying' value="no" control={<Radio />} label="No" />
+                    <FormControlLabel name='studying' value="yes" control={<Radio required/>} label="Yes" />
+                    <FormControlLabel name='studying' value="no" control={<Radio required/>} label="No" />
                 </RadioGroup>
             </FormControl>
             {
-                values.studying=="yes" &&
+                values.studying==="yes" &&
                 <>
-                    <Typography variant="h4">Please provide the name(s) of what you are studying</Typography>
+                    <FormLabel>Please provide the name(s) of what you are studying</FormLabel>
                     <LargeTextField
                         id='studydetails'
                         name='studydetails'
@@ -32,6 +31,7 @@ function StudyingDetails(props) {
                         placeholder="Detail your study here"
                         onChange={handleChange}
                         value={values.studydetails}
+                        required
                     />
                 </>
             }
