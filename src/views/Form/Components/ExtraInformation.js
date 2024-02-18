@@ -6,7 +6,7 @@ function ExtraInformation (props) {
     
     return(
         <Container {...rest}>
-            <Typography variant="h3">Extra Information</Typography>
+            <Typography variant="h3">Extra information?</Typography>
             <LargeTextField 
                 label="Extra information"
                 placeholder="Enter any additional information here"
